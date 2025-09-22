@@ -1,0 +1,17 @@
+node_modules
+.DS_Store
+dist
+build
+.env
+.env.*
+.pnpm-store
+apps/web/node_modules
+apps/api/node_modules
+apps/sfu/node_modules
+apps/companion/node_modules
+pnpm-lock.yaml
+.vscode
+.idea
+coverage
+.tmp
+*.log

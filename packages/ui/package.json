@@ -1,0 +1,21 @@
+{
+  "name": "@flstudio/ui",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --watch --format esm,cjs --dts",
+    "lint": "eslint 'src/**/*.ts{,x}'",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.1.0",
+    "vitest": "^1.6.0"
+  }
+}

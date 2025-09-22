@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Companion ASIO Bridge</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 24px;
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+      button {
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .start {
+        background: #22c55e;
+        color: #0f172a;
+      }
+      .stop {
+        background: #f87171;
+        color: #0f172a;
+      }
+      .panel {
+        background: rgba(15, 23, 42, 0.8);
+        border-radius: 16px;
+        padding: 16px;
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Companion ASIO Bridge</h1>
+    <div>
+      <button id="start" class="start">Iniciar Bridge</button>
+      <button id="stop" class="stop">Detener</button>
+    </div>
+    <div class="panel">
+      <h2>Estado de latencia</h2>
+      <p>Round-trip: <span id="rtt">-</span> ms</p>
+      <p>Última actualización: <span id="timestamp">-</span></p>
+      <p id="status">Esperando conexión…</p>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>
