@@ -2,7 +2,7 @@ import { EventEmitter } from 'node:events';
 import WebSocket from 'ws';
 import { Device, types as MediasoupTypes } from 'mediasoup-client';
 import * as wrtc from 'wrtc';
-import { AudioInput, SampleFormat32Bit } from 'naudiodon';
+import { AudioInput, SampleFormatFloat32 } from 'naudiodon';
 import type { AudioInputOptions } from 'naudiodon';
 
 (globalThis as unknown as { RTCPeerConnection: unknown }).RTCPeerConnection = wrtc.RTCPeerConnection;
@@ -209,7 +209,7 @@ export class AsioBridge extends EventEmitter {
       channelCount: config.channelCount,
       sampleRate: config.sampleRate,
       framesPerBuffer: config.bufferSize,
-      sampleFormat: SampleFormat32Bit,
+      sampleFormat: SampleFormatFloat32,
     } as AudioInputOptions;
 
     if (typeof config.deviceId === 'number') {
