@@ -2,7 +2,7 @@ import { EventEmitter } from 'node:events';
 import WebSocket from 'ws';
 import { Device, types as MediasoupTypes } from 'mediasoup-client';
 import * as wrtc from 'wrtc';
-import { AudioInput, SampleFormat32Bit } from 'naudiodon';
+import { AudioInput, SampleFormatFloat32 } from 'naudiodon';
 import type { AudioInputOptions } from 'naudiodon';
 
 (globalThis as unknown as { RTCPeerConnection: unknown }).RTCPeerConnection = wrtc.RTCPeerConnection;
@@ -209,7 +209,7 @@ export class AsioBridge extends EventEmitter {
       channelCount: config.channelCount,
       sampleRate: config.sampleRate,
       framesPerBuffer: config.bufferSize,
-      sampleFormat: SampleFormat32Bit,
+      sampleFormat: SampleFormatFloat32,
     } as AudioInputOptions;
 
     if (typeof config.deviceId === 'number') {
@@ -232,7 +232,16 @@ export class AsioBridge extends EventEmitter {
       if (!this.audioSource) {
         return;
       }
-      const samples = new Float32Array(buffer.buffer, buffer.byteOffset, buffer.length / Float32Array.BYTES_PER_ELEMENT);
+
+      const sampleCount = buffer.byteLength / Float32Array.BYTES_PER_ELEMENT;
+      if (!Number.isInteger(sampleCount)) {
+        this.emit('error', new Error('Received audio buffer with unexpected length'));
+        return;
+      }
+
+      const floatView = new Float32Array(buffer.buffer, buffer.byteOffset, sampleCount);
+      const samples = new Float32Array(floatView);
+
       this.audioSource.onData({
         samples,
         sampleRate: config.sampleRate,

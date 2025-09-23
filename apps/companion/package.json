@@ -12,7 +12,7 @@
     "dotenv": "^16.4.5",
     "electron": "^29.1.2",
     "mediasoup-client": "^3.7.15",
-    "naudiodon": "^3.4.10",
+    "naudiodon": "^2.3.6",
     "wrtc": "^0.4.7",
     "zod": "^3.23.8"
   },
