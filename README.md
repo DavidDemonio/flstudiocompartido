@@ -66,14 +66,20 @@
 ## 3. Guía rápida
 
 1. **Instalar pnpm** `npm install -g pnpm@8` y Node 20+.
-2. **Instalar dependencias**: `pnpm install` (requiere toolchain para compilar dependencias nativas como mediasoup y naudiodon).
-3. **Servir todo en paralelo**: `pnpm dev`.
+2. **Preparar toolchain nativa en Windows (para compilar `naudiodon` y `wrtc`)**:
+   - Python 3.10–3.12 instalado con `Add to PATH` habilitado. Ejecuta `py -m pip install --upgrade pip setuptools` para evitar el error `No module named 'distutils'`.
+   - Indica la ruta de Python a pnpm: `pnpm config set python python311` (ajusta según tu versión).
+   - Instala **Visual Studio Build Tools 2022** con el workload “Desktop development with C++” (MSVC, Windows SDK, CMake). Sigue la [guía oficial de node-gyp](https://github.com/nodejs/node-gyp#on-windows).
+   - Descarga PortAudio desde su [sitio oficial](https://portaudio.com/download.html) si necesitas compilarlo manualmente (requerido por `naudiodon`).
+   - Con la toolchain lista, instala dependencias específicas cuando sea necesario, por ejemplo: `pnpm install --filter @flstudio/companion`.
+3. **Instalar dependencias**: `pnpm install` (requiere toolchain para compilar dependencias nativas como mediasoup y naudiodon).
+4. **Servir todo en paralelo**: `pnpm dev`.
    - `apps/web`: Vite en `http://localhost:5173`.
    - `apps/api`: Fastify API en `http://localhost:4000`.
    - `apps/sfu`: Signaling + SFU en `ws://localhost:4443` (DTLS en puertos dinámicos UDP/TCP).
    - `apps/companion`: Ejecuta `pnpm --filter @flstudio/companion dev` (abre ventana Electron).
-4. **Migraciones**: configura `DATABASE_URL` y ejecuta `pnpm migrate` (aplica `apps/api/migrations`).
-5. **Limitaciones conocidas**:
+5. **Migraciones**: configura `DATABASE_URL` y ejecuta `pnpm migrate` (aplica `apps/api/migrations`).
+6. **Limitaciones conocidas**:
    - El SDK de ASIO y los binarios de VST3/CLAP **no se distribuyen**. Debes aceptar sus licencias, descargar e indicar la ruta antes de compilar el companion.
    - El objetivo es <50 ms E2E; `0 ms` es físicamente imposible (documentado en `docs/latency-guide.md`).
    - La demo incluye un sintetizador WASM sustractivo simple y un EQ digital básico; son ejemplos iniciales.
