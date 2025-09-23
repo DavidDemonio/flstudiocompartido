@@ -8,7 +8,7 @@
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
     "migrate": "pnpm --filter @flstudio/api migrate",
-    "setup": "cmd /c scripts\\bootstrap.bat"
+    "setup": "node scripts/bootstrap.mjs"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.8.0",

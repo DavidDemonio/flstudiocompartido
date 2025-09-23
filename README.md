@@ -72,9 +72,7 @@
    - Instala **Visual Studio Build Tools 2022** con el workload “Desktop development with C++” (MSVC, Windows SDK, CMake). Sigue la [guía oficial de node-gyp](https://github.com/nodejs/node-gyp#on-windows).
    - Descarga PortAudio desde su [sitio oficial](https://portaudio.com/download.html) si necesitas compilarlo manualmente (requerido por `naudiodon`).
    - Con la toolchain lista, instala dependencias específicas cuando sea necesario, por ejemplo: `pnpm install --filter @flstudio/companion`.
-3. **Instalar dependencias / asistente de arranque**:
-   - En **Windows**, ejecuta `pnpm setup` para lanzar `scripts\\bootstrap.bat`. El asistente verifica que `pnpm`, Python 3 y Visual Studio Build Tools estén disponibles (ofrece instalarlas vía `pnpm dlx windows-build-tools@latest` si faltan), corre `pnpm install` sobre todo el monorepo y, al terminar, te deja escoger entre `pnpm dev` o servicios individuales (`api`, `sfu`, `companion`).
-   - En **macOS/Linux** (o si prefieres una instalación manual), ejecuta `pnpm install` y luego los scripts correspondientes.
+3. **Asistente de arranque**: ejecuta `pnpm setup` para lanzar `scripts/bootstrap.mjs`. El asistente detecta tu plataforma, valida que Python 3 y la toolchain nativa estén disponibles (en Windows comprueba Visual Studio Build Tools y ofrece instalarlas con `pnpm dlx windows-build-tools@latest` si faltan), ejecuta `pnpm install` sobre todo el monorepo y, al finalizar, permite arrancar `pnpm dev` o servicios individuales (`api`, `sfu`, `companion`) desde un único flujo guiado. Si prefieres una instalación manual, ejecuta `pnpm install` y luego inicia cada script por separado.
 4. **Servir todo en paralelo** (desde el asistente o manualmente): `pnpm dev`.
    - `apps/web`: Vite en `http://localhost:5173`.
    - `apps/api`: Fastify API en `http://localhost:4000`.
