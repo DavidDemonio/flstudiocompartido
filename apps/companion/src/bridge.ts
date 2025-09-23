@@ -239,8 +239,7 @@ export class AsioBridge extends EventEmitter {
         return;
       }
 
-      const floatView = new Float32Array(buffer.buffer, buffer.byteOffset, sampleCount);
-      const samples = new Float32Array(floatView);
+      const samples = new Float32Array(buffer.buffer, buffer.byteOffset, sampleCount);
 
       this.audioSource.onData({
         samples,
