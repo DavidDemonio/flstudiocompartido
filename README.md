@@ -72,12 +72,12 @@
    - Instala **Visual Studio Build Tools 2022** con el workload “Desktop development with C++” (MSVC, Windows SDK, CMake). Sigue la [guía oficial de node-gyp](https://github.com/nodejs/node-gyp#on-windows).
    - Descarga PortAudio desde su [sitio oficial](https://portaudio.com/download.html) si necesitas compilarlo manualmente (requerido por `naudiodon`).
    - Con la toolchain lista, instala dependencias específicas cuando sea necesario, por ejemplo: `pnpm install --filter @flstudio/companion`.
-3. **Instalar dependencias**: `pnpm install` (requiere toolchain para compilar dependencias nativas como mediasoup y naudiodon).
-4. **Servir todo en paralelo**: `pnpm dev`.
+3. **Asistente de arranque (Windows)**: `pnpm setup` ejecuta `scripts\\bootstrap.bat`, verifica que `pnpm`, Python 3 y las Visual Studio Build Tools estén disponibles (ofrece instalarlas vía `pnpm dlx windows-build-tools@latest` si faltan), instala todas las dependencias con `pnpm install` y, al terminar, te deja escoger entre `pnpm dev` o servicios individuales (`api`, `sfu`, `companion`). En macOS/Linux ejecuta manualmente `pnpm install` y los scripts correspondientes.
+4. **Servir todo en paralelo** (desde el asistente o manualmente): `pnpm dev`.
    - `apps/web`: Vite en `http://localhost:5173`.
    - `apps/api`: Fastify API en `http://localhost:4000`.
    - `apps/sfu`: Signaling + SFU en `ws://localhost:4443` (DTLS en puertos dinámicos UDP/TCP).
-   - `apps/companion`: Ejecuta `pnpm --filter @flstudio/companion dev` (abre ventana Electron).
+   - `apps/companion`: Ejecuta `pnpm --filter @flstudio/companion dev` o selecciónalo desde `pnpm setup` (abre ventana Electron).
 5. **Migraciones**: configura `DATABASE_URL` y ejecuta `pnpm migrate` (aplica `apps/api/migrations`).
 6. **Limitaciones conocidas**:
    - El SDK de ASIO y los binarios de VST3/CLAP **no se distribuyen**. Debes aceptar sus licencias, descargar e indicar la ruta antes de compilar el companion.
